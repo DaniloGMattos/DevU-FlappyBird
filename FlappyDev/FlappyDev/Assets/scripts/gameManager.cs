@@ -23,11 +23,16 @@ public class gameManager : MonoBehaviour {
 	}
 	
 	int scoreValue = 0;
-	bool isGameOver = false;
+	bool isGameOver = true;
+	
 
 	public bool GameOver {get {return isGameOver;}}
+	void Start () {
+	ConfirmGameOver();
+	}
 	void Awake(){
 		Instance = this;
+		
 	}
 	void OnEnable(){
 		CountDownText.OnCountdownFinished += OnCountdownFinished;

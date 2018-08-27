@@ -21,6 +21,8 @@ gameManager game;
 		downRotation = Quaternion.Euler(0,0,-90); // estou pegando um vetor 3d e convertendo em quaternion para usar na rotação e esses numeros sao os angulos 
 		fowardRotation = Quaternion.Euler(0,0,35);
 		game = gameManager.Instance;
+		rigedBody.simulated = false;
+
 		
 
 		

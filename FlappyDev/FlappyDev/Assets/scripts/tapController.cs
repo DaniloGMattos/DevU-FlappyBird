@@ -7,6 +7,11 @@ public class tapController : MonoBehaviour {
 public delegate void PlayerDelegate();
 public static event PlayerDelegate OnPlayerDied;
 public static event PlayerDelegate OnPlayerScored;
+public AudioSource tapAudio;
+public AudioSource scoreAudio;
+public AudioSource dieAudio;
+public Animator anim;
+bool didFlap = false;
 
 public float tapForce = 10f;
 public float tiltSmoth = 5f;
@@ -22,7 +27,8 @@ gameManager game;
 		fowardRotation = Quaternion.Euler(0,0,35);
 		game = gameManager.Instance;
 		rigedBody.simulated = false;
-
+		anim = GetComponent<Animator>();
+		anim.SetBool("isFlapping",didFlap);
 		
 
 		
@@ -52,6 +58,9 @@ gameManager game;
 	void Update () {
 		if (game.GameOver) return;
 		if (Input.GetMouseButtonDown(0)){
+			didFlap = true;
+			anim.SetBool("isFlapping",didFlap);
+			tapAudio.Play();
 			transform.rotation = fowardRotation; //BONUS  : transform.rotation é um quaternium, nao é um vector3
 			rigedBody.velocity = Vector3.zero;
 			rigedBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
@@ -65,6 +74,7 @@ gameManager game;
 			//TODO: Register a score event
 			OnPlayerScored();//event sent to GameManager
 			//TODO :play sound
+			scoreAudio.Play();
 
 		}
 		if (col.gameObject.tag == "deadZone"){
@@ -72,6 +82,7 @@ gameManager game;
 			//TODO : Register a dead event
 			OnPlayerDied();//event sent to GameManager
 			//TODO : play sound
+			dieAudio.Play();
 
 		}
 

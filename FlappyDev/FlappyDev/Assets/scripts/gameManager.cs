@@ -7,6 +7,7 @@ public class gameManager : MonoBehaviour {
 	public delegate void GameDelegate();// Isso vai permitir criar eventos em scripts para ser notificado
 	public static event GameDelegate OnGameStarted;
 	public static event GameDelegate OnGameOverConfirmed;
+	public AudioSource pressAudio;
 
 	public static gameManager Instance;
 	public GameObject starPage;
@@ -106,12 +107,15 @@ public class gameManager : MonoBehaviour {
 	}
 	public void ConfirmGameOver(){
 		//activated when replay button is hit
+		pressAudio.Play();
 		OnGameOverConfirmed();//event sent to tapController
 		scoreText.text = "0";
 		SetPageState(PageState.Start);
 	}
 	public void StartGame(){
 		//activated when play button is hit
+		
 		SetPageState(PageState.CountDown);
+		pressAudio.Play();
 	}
 }

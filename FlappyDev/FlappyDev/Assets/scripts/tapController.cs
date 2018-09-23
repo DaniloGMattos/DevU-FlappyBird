@@ -22,6 +22,7 @@ Quaternion fowardRotation;
 gameManager game;
 	// Use this for initialization
 	void Start () {
+		Screen.orientation = ScreenOrientation.Portrait;
 		rigedBody = GetComponent<Rigidbody2D>();
 		downRotation = Quaternion.Euler(0,0,-90); // estou pegando um vetor 3d e convertendo em quaternion para usar na rotação e esses numeros sao os angulos 
 		fowardRotation = Quaternion.Euler(0,0,35);
